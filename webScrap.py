@@ -57,9 +57,9 @@ def search():
             confort1 = driver.find_element(By.XPATH,'/html/body/form/div/div/div[2]/div[1]/div/div/div/div/li[5]')
             confort2 = driver.find_element(By.XPATH,'/html/body/form/div/div/div[2]/div[1]/div/div/div/div/li[6]')
             
-            print('\nModelo de auto'+modelo.text+'\n'+anno.text+'\n'+combustible.text+'\n'+km.text+'\n'+transmision.text
-            +'\n'+traccion.text+'\n'+cilindrado.text+'\n'+capacidad.text+'\n'+precio.text+'\n'+eqBasico1.text+'\n'+eqBasico2.text
-            +'\n'+eqBasico3.text+'\n'+eqBasico4.text+'\n'+confort1.text+'\n'+confort2.text)
+            print('\nModelo de auto: '+modelo.text+'\nAño del auto: '+anno.text+'\ntipo de combustible: '+combustible.text+'\nKilometraje del Vehiculo: '+km.text+'\nTipo de transmisión:'+transmision.text
+            +'\nTipo de tracción: '+traccion.text+'\nCilindrado: '+cilindrado.text+'\nCapacidad de personas: '+capacidad.text+'\nPrecio regular: '+precio.text+'\nExtras: '+eqBasico1.text+'\n'+eqBasico2.text
+            +'\n'+eqBasico3.text+'\n'+eqBasico4.text+'\n'+confort1.text+'\n'+confort2.text+'\nImagen: '+img)
 
 
 
