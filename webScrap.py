@@ -1,14 +1,20 @@
+from firebase import firebase
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException 
 import time
+
+
+db=firebase.FirebaseApplication('https://webscrap-python-default-rtdb.firebaseio.com/')
+
 
 link_detalles = []
 
 # Search game in Amazon
 def search():
     url = 'https://veinsausados.com/buscar/'
-
+    
+    
     # Selenium
     options = webdriver.ChromeOptions()
     options.add_argument('--incognito')
@@ -16,7 +22,7 @@ def search():
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
     driver = webdriver.Chrome(
-        executable_path="./chromedriver", options=options)
+        executable_path="WebScraping_Python\chromedriver.exe", options=options)
     driver.get(url)
 
     time.sleep(3)
@@ -55,11 +61,26 @@ def search():
             eqBasico3 = driver.find_element(By.XPATH,'/html/body/form/div/div/div[2]/div[1]/div/div/div/div/li[3]')
             eqBasico4 = driver.find_element(By.XPATH,'/html/body/form/div/div/div[2]/div[1]/div/div/div/div/li[4]')
             confort1 = driver.find_element(By.XPATH,'/html/body/form/div/div/div[2]/div[1]/div/div/div/div/li[5]')
-            confort2 = driver.find_element(By.XPATH,'/html/body/form/div/div/div[2]/div[1]/div/div/div/div/li[6]')
+
+            data={
+                'modelo' : modelo.text,
+                'anno' : anno.text,
+                'km' : km.text,
+                'transmision' : transmision.text,
+                'combustible' : combustible.text,
+                'traccion' : traccion.text,
+                'cilindrado' : cilindrado.text,
+                'capacidad' : capacidad.text,
+                'precio' : precio.text,
+                'img' : img.text,
+                'eqBasico1' : eqBasico1.text,
+                'eqBasico2' : eqBasico2.text,
+                'eqBasico3' : eqBasico3.text,
+                'eqBasico4' : eqBasico4.text,
+                'confort1' : confort1.text
+            }
             
-            print('\nModelo de auto: '+modelo.text+'\nAño del auto: '+anno.text+'\ntipo de combustible: '+combustible.text+'\nKilometraje del Vehiculo: '+km.text+'\nTipo de transmisión:'+transmision.text
-            +'\nTipo de tracción: '+traccion.text+'\nCilindrado: '+cilindrado.text+'\nCapacidad de personas: '+capacidad.text+'\nPrecio regular: '+precio.text+'\nExtras: '+eqBasico1.text+'\n'+eqBasico2.text
-            +'\n'+eqBasico3.text+'\n'+eqBasico4.text+'\n'+confort1.text+'\n'+confort2.text+'\nImagen: '+img)
+            db.post("/autosUsados",data)
 
 
 
